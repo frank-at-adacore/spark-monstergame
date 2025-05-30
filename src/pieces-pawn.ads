@@ -3,7 +3,9 @@
 --
 --@description
 --
-package Pieces.Pawn is
+package Pieces.Pawn with
+  SPARK_Mode
+is
 
    -- Pawn base clase
    type Pawn_Class is abstract new Piece_Class with null record;

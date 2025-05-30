@@ -4,7 +4,10 @@
 --@description
 -- Players move from cell to cell, one cell at a time trying to avoid monsters.
 --
-package Pieces.Pawn.Player is
+package Pieces.Pawn.Player with
+  SPARK_Mode
+is
+   pragma Elaborate_Body;  -- added to prevent error E0003
 
    type Player_Class is new Pawn_Class with null record;
 

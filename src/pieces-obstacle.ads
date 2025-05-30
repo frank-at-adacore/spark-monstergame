@@ -3,7 +3,10 @@
 --
 --@description
 --
-package Pieces.Obstacle is
+package Pieces.Obstacle with
+  SPARK_Mode
+is
+   pragma Elaborate_Body;  -- added to prevent error E0003
 
    type Obstacle_Class is new Piece_Class with null record;
 

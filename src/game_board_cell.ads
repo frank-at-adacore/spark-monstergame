@@ -6,7 +6,9 @@ with Location;
 -- Ada 2005
 private with Ada.Containers.Doubly_Linked_Lists;
 
-package Game_Board_Cell is
+package Game_Board_Cell with
+  SPARK_Mode
+is
 
    type Cell_Class is tagged private;
 
@@ -16,26 +18,15 @@ package Game_Board_Cell is
      (Object : in out Cell_Class;
       Piece  :        Pieces.Piece_Class_Ptr);
 
-   -- Ada 2012 Feature - function with in out / out modes
-
    -- Attempt to get a player piece from the cell.
    --
-   -- Returns whether piece was found and returned
-   function Get_Piece
-     ( -- Object instance
-       Object : in out Cell_Class;
-
-      -- Instance tag
-      --
-      -- Identifies the class tag to look for.
-      Piece_Tag : in Ada.Tags.Tag;
-
-      -- Controls whether piece should be removed from the cell or left in the cell
-      Remove : in Boolean := False;
-
-      -- Piece object to return, or null if not found
-      Piece : out Pieces.Piece_Class_Ptr)
-      return Boolean;
+   -- Status indicates whether piece was found and returned
+   procedure Get_Piece
+     (Object    : in out Cell_Class;
+      Piece_Tag :        Ada.Tags.Tag;
+      Remove    :        Boolean := False;
+      Piece     :    out Pieces.Piece_Class_Ptr;
+      Status    :    out Boolean);
 
    -- Number of Pieces in the cell.
    function Piece_Count

@@ -3,7 +3,9 @@
 --
 --@description
 -- Game board cells have locations which are used to control drawing.
-package Location is
+package Location with
+  SPARK_Mode
+is
 
    -- Abstract the the grid dimensions
    subtype Grid_Axis is Positive;

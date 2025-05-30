@@ -1,4 +1,6 @@
-package Screen is
+package Screen with
+  SPARK_Mode
+is
 
    procedure Move_Cursor
      (X : Natural;

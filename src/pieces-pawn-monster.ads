@@ -4,7 +4,10 @@
 --@description
 -- Monsters move from cell to cell, one cell at a time trying to eat players.
 --
-package Pieces.Pawn.Monster is
+package Pieces.Pawn.Monster with
+  SPARK_Mode
+is
+   pragma Elaborate_Body;  -- added to prevent error E0003
 
    type Monster_Class is new Pawn_Class with record
 

@@ -7,7 +7,9 @@ with Location;
 --
 -- Interface definition so classes can implement interface functions
 -- to translate a game grid coordinate to a display coordinate.
-package Display_Coordinate is
+package Display_Coordinate with
+  SPARK_Mode
+is
 
    subtype Display_Axis is Natural;
 

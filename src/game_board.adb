@@ -302,6 +302,8 @@ package body Game_Board is
       use type Game_Board_Cell.Cell_Class_Ptr;
       use type Pieces.Piece_Class_Ptr;
 
+      Get_Piece_Result : Boolean;
+
    begin
 
       -- Find Player --
@@ -313,10 +315,12 @@ package body Game_Board is
 
       loop
          -- Assume pre-condition is board has player...
-         exit when Board_Cells (Player_R, Player_C).Get_Piece
-             (Piece_Tag => Pieces.Pawn.Player.Player_Class'Tag,
-              Remove    => True,
-              Piece     => Piece)
+         Board_Cells (Player_R, Player_C).Get_Piece
+           (Piece_Tag => Pieces.Pawn.Player.Player_Class'Tag,
+            Remove    => True,
+            Piece     => Piece,
+            Status    => Get_Piece_Result);
+         exit when Get_Piece_Result
            or else (Player_R = Row_Range'Last and Player_C = Col_Range'Last);
 
          -- Manage row,col indexing...
@@ -365,6 +369,8 @@ package body Game_Board is
 
       Status : Move_Request_Status_Type;
 
+      Get_Piece_Result : Boolean;
+
    begin
       -- This will only move one monster from the cell if more than one are on the cell --
 
@@ -375,10 +381,12 @@ package body Game_Board is
             Cell := Board_Cells (R, C);
 
             -- Attempt to get a monster from the cell
-            if Cell.Get_Piece
-                (Piece_Tag => Pieces.Pawn.Monster.Monster_Class'Tag,
-                 Remove    => True,
-                 Piece     => Monster_Piece) then
+            Cell.Get_Piece
+              (Piece_Tag => Pieces.Pawn.Monster.Monster_Class'Tag,
+               Remove    => True,
+               Piece     => Monster_Piece,
+               Status    => Get_Piece_Result);
+            if Get_Piece_Result then
 
                Direction := Random_Direction.Random_Value;
                Move_Piece
@@ -397,10 +405,12 @@ package body Game_Board is
                end if;
 
                -- Attempt to get a player piece from the same cell that the monster is at.
-               if Cell.Get_Piece
-                   (Piece_Tag => Pieces.Pawn.Player.Player_Class'Tag,
-                    Remove    => True,
-                    Piece     => Player_Piece) then
+               Cell.Get_Piece
+                 (Piece_Tag => Pieces.Pawn.Player.Player_Class'Tag,
+                  Remove    => True,
+                  Piece     => Player_Piece,
+                  Status    => Get_Piece_Result);
+               if Get_Piece_Result then
 
                   -- "eat" the player.
                   -- Need to down-cast the piece to the monster sub-class

@@ -2,6 +2,25 @@ with Ada.Tags;
 
 package body Game_Board_Cell is
 
+   -- Attempt to get a player piece from the cell.
+   --
+   -- Returns whether piece was found and returned
+   function Get_Piece
+     ( -- Object instance
+       Object : in out Cell_Class;
+
+      -- Instance tag
+      --
+      -- Identifies the class tag to look for.
+      Piece_Tag : in Ada.Tags.Tag;
+
+      -- Controls whether piece should be removed from the cell or left in the cell
+      Remove : in Boolean := False;
+
+      -- Piece object to return, or null if not found
+      Piece : out Pieces.Piece_Class_Ptr)
+      return Boolean;
+
    ---------------
    -- Add_Piece --
    ---------------
@@ -153,6 +172,16 @@ package body Game_Board_Cell is
 
       return Found_Piece;
 
+   end Get_Piece;
+
+   procedure Get_Piece
+     (Object    : in out Cell_Class;
+      Piece_Tag :        Ada.Tags.Tag;
+      Remove    :        Boolean := False;
+      Piece     :    out Pieces.Piece_Class_Ptr;
+      Status    :    out Boolean) is
+   begin
+      Status := Get_Piece (Object, Piece_Tag, Remove, Piece);
    end Get_Piece;
 
    function Make

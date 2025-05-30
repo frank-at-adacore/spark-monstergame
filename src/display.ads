@@ -1,6 +1,8 @@
 with Display_Coordinate;
 
-package Display is
+package Display with
+  SPARK_Mode
+is
 
    type Display_Class is new Display_Coordinate.Coordinate_Class with record
 

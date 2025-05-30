@@ -10,7 +10,9 @@ limited with Game_Board_Cell;
 --
 -- This is the high-level class hierarchy:
 -- @image pieces_class_hierarchy.png
-package Pieces is
+package Pieces with
+  SPARK_Mode
+is
 
    -- Abstract base class for a piece
    --

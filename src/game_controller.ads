@@ -4,7 +4,9 @@ with Game_Board;
 -- Contains the main game logic and actions
 --@desctipion
 -- Provides all ways to interact with the game and perform automatic game actions
-package Game_Controller is
+package Game_Controller with
+  SPARK_Mode
+is
 
    -- Sets up the game board for new game.
    procedure Setup_Game_Board;

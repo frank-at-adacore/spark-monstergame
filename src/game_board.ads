@@ -1,7 +1,9 @@
 with Pieces.Pawn.Player;
 with Game_Board_Cell;
 
-package Game_Board is
+package Game_Board with
+  SPARK_Mode
+is
 
    -- Dimensions of game board - Rows
    Num_Rows : constant := 5;
